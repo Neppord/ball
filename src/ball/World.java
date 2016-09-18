@@ -19,8 +19,8 @@ public class World {
     private final Point2D NORMAL_UP = new Point2D(0, 1);
 
     public void physics(ActionEvent event) {
-        player.velocity = player.velocity.add(ioTug);
-        player.velocity = player.velocity.add(gravity.multiply(0.2));
+        player.velocity = player.velocity.add(ioTug.multiply(0.1));
+        player.velocity = player.velocity.add(gravity.multiply(0.05));
         for(Rectangle2D box: boxes) {
             if(box.intersects(player.position)) {
                 if(player.velocity.getY() < 0) {
@@ -29,13 +29,7 @@ public class World {
                 break;
             }
         }
-        Point2D vel = player.velocity.multiply(0.2);
-        player.position = new Rectangle2D(
-            player.position.getMinX() + vel.getX(),
-            player.position.getMinY() + vel.getY(),
-            player.position.getWidth(),
-            player.position.getHeight()
-        );
+        player.move();
     }
 
     private static Point2D reflect(Point2D vector, Point2D normal) {
