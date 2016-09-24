@@ -25,6 +25,14 @@ public class World {
             if(box.intersects(player.position)) {
                 if(player.velocity.getY() < 0) {
                     player.velocity = reflect(player.velocity, NORMAL_UP);
+                    if (player.velocity.getY() > 3) {
+                        player.velocity = player.velocity.multiply(0.9);
+                    } else {
+                        player.velocity = new Point2D(
+                            player.velocity.getX(),
+                            3
+                        );
+                    }
                 }
                 break;
             }
