@@ -14,13 +14,13 @@ public class World {
             new Rectangle2D(-150, -300, 1000, 50),
             new Rectangle2D(150, -200, 100, 10)
     );
-    public final Point2D gravity = new Point2D(0, -0.8);
+    public final Point2D gravity = new Point2D(0, -9.8);
     public Point2D ioTug = Point2D.ZERO;
     private final Point2D NORMAL_UP = new Point2D(0, 1);
 
     public void physics(ActionEvent event) {
         player.velocity = player.velocity.add(ioTug.multiply(0.1));
-        player.velocity = player.velocity.add(gravity.multiply(0.05));
+        player.velocity = player.velocity.add(gravity.multiply(0.005));
         for(Rectangle2D box: boxes) {
             if(box.intersects(player.position)) {
                 if(player.velocity.getY() < 0) {
