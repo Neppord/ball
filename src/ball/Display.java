@@ -13,7 +13,7 @@ public class Display {
     public Camera camera = new PerspectiveCamera();
     private Sphere ball = new Sphere(10);
     private PointLight light = new PointLight(Color.WHITE);
-    private AmbientLight ambientLight = new AmbientLight(Color.RED);
+    private AmbientLight ambientLight = new AmbientLight(Color.WHITE);
     private final Group player = new Group(ball, camera, light, ambientLight);
     private final Group ground = new Group();
     private final Group level = new Group(player, ground);
@@ -43,7 +43,11 @@ public class Display {
     }
 
     public void animate(long now) {
-
+        if (world.ioTug.getY() < 0) {
+            ball.setMaterial(new PhongMaterial(Color.ORANGE));
+        } else {
+            ball.setMaterial(new PhongMaterial(Color.RED));
+        }
         camera.setTranslateX(-levelScene.getWidth()/2);
         camera.setTranslateY(-levelScene.getHeight()/2);
         player.setTranslateX(world.player.position.getMinX());
